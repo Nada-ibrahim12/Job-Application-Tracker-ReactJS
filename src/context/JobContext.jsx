@@ -1,8 +1,8 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-export const JobContext = createContext();
+const JobContext = createContext();
 
-export const JobProvider = ({ children }) => {
+export function JobProvider({ children }) {
   const [jobs, setJobs] = useState(() => {
     const saved = localStorage.getItem("jobs");
     return saved ? JSON.parse(saved) : [];
@@ -12,9 +12,16 @@ export const JobProvider = ({ children }) => {
     localStorage.setItem("jobs", JSON.stringify(jobs));
   }, [jobs]);
 
+  const addJob = (job) => setJobs([...jobs, job]);
+  const deleteJob = (id) => setJobs(jobs.filter((job) => job.id !== id));
+  const updateJob = (updatedJob) =>
+    setJobs(jobs.map((job) => (job.id === updatedJob.id ? updatedJob : job)));
+
   return (
-    <JobContext.Provider value={{ jobs, setJobs }}>
+    <JobContext.Provider value={{ jobs, addJob, deleteJob, updateJob }}>
       {children}
     </JobContext.Provider>
   );
-};
+}
+
+export const useJobs = () => useContext(JobContext);
