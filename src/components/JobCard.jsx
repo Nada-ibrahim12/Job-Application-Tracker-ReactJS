@@ -6,7 +6,7 @@ export class JobCard extends Component {
     console.log("JobCard props:", this.props);
     return (
       <div
-        className={`border p-6 rounded-md shadow-md flex flex-row justify-between border-s-8 bg-white hover:shadow-lg transition-shadow duration-200
+        className={`border p-6 rounded-xl shadow-md flex flex-row justify-between border-s-8 bg-white hover:shadow-lg transition-shadow duration-200
         ${
           this.props.status === "applied"
             ? "border-cyan-700"

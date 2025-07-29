@@ -1,13 +1,43 @@
 import React, { Component } from "react";
 import { jobs } from "../utils/dummyData";
+import { Navigate } from "react-router-dom";
 
 export class AddJob extends Component {
+  state = {
+    redirect: false,
+  };
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const newJob = {
+      title: formData.get("title"),
+      company: formData.get("company"),
+      status: formData.get("status"),
+      dateApplied: formData.get("dateApplied"),
+      location: formData.get("location"),
+      notes: formData.get("notes"),
+    };
+
+    jobs.push(newJob);
+    console.log("New job added:", newJob);
+    e.target.reset();
+    alert("Job added successfully!");
+    this.setState({ redirect: true });
+  };
+
   render() {
+    if (this.state.redirect) {
+      return <Navigate to="/" />;
+    }
     return (
       <div className="container mx-auto p-6">
         <h1 className="text-2xl font-bold text-center">Add Job</h1>
         <div className="container mx-auto shadow-xl shadow-cyan-700 rounded-lg p-6 mt-5 max-w-5xl">
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <form
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            onSubmit={this.handleSubmit}
+            aria-label="Add Job Form"
+          >
             <div>
               <label className="block text-gray-700 mb-1">Job Title</label>
               <input
