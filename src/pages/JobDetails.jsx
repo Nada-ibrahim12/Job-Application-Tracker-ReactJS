@@ -16,9 +16,9 @@ export class JobDetails extends Component {
       <div>
         <h1 className="text-3xl font-bold m-8 text-center">Job Details</h1>
         <div className="container mx-auto shadow-xl shadow-cyan-700 rounded-lg p-6 w-1/2">
-          <div className="mb-6 flex flex-row items-center justify-between">
+          <div className="mb-6 w-full flex flex-row items-center justify-between shadow-cyan-700 shadow-inner p-4 rounded-lg">
             <h2 className="text-2xl font-bold mb-2">
-              Job Title: {job ? job.title : "Job Title Here"}
+              {job ? job.title : "Job Title Here"}
             </h2>
             <p
               className={`px-3 py-1 rounded-full bg-cyan-700 bg-opacity-50 font-bold ${

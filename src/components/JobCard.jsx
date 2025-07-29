@@ -5,13 +5,13 @@ export class JobCard extends Component {
   render() {
     console.log('JobCard props:', this.props);
     return (
-      <div className="border p-4 rounded-md shadow-md flex flex-row justify-between bg-white hover:shadow-lg transition-shadow duration-200">
+      <div className="border p-6 rounded-md shadow-md flex flex-row justify-between bg-white hover:shadow-lg transition-shadow duration-200">
         <div>
           <h2 className="text-xl font-bold">{this.props.title}</h2>
           <p className="text-gray-600">{this.props.company}</p>
           <p className="text-gray-500">{this.props.location}</p>
-          <p className="mt-2 text-gray-700">{this.props.dateApplied}</p>
-          <p className="mt-2">{this.props.notes}</p>
+          <p className="mt-2 text-gray-700">Applied Date: {this.props.dateApplied}</p>
+          <p className="mt-2">Note: {this.props.notes}</p>
         </div>
         <div className="mt-4 flex flex-col text-center">
           <p
