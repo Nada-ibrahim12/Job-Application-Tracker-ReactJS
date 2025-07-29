@@ -21,8 +21,7 @@ class AddJob extends Component {
     const { jobId } = this.props.params;
 
     if (jobId) {
-      const jobToEdit = jobs.find((job, index) => index.toString() === jobId);
-
+    const jobToEdit = jobs.find((job) => job.id.toString() === jobId);
       if (jobToEdit) {
         this.setState({
           job: jobToEdit,
@@ -47,10 +46,16 @@ class AddJob extends Component {
     const { jobId } = this.props.params;
 
     if (this.state.isEditMode) {
-      jobs[jobId] = this.state.job;
-      alert("Job updated successfully!");
+      const index = jobs.findIndex((job) => job.id.toString() === jobId);
+      if (index !== -1) {
+        jobs[index] = this.state.job;
+        alert("Job updated successfully!");
+      } else {
+        alert("Job not found for update!");
+      }
     } else {
-      jobs.push(this.state.job);
+      const newJob = { ...this.state.job, id: Date.now() };
+      jobs.push(newJob);
       alert("Job added successfully!");
     }
 
