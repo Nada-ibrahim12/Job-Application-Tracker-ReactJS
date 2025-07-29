@@ -39,8 +39,10 @@ export default function Dashboard() {
             title={job.title}
             company={job.company}
             location={job.location}
-            description={job.description}
+            notes={job.notes}
             status={job.status}
+            dateApplied={job.dateApplied}
+            id={job.id}
           />
         ))}
       </div>
