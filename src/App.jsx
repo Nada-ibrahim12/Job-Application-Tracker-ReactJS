@@ -14,8 +14,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/add" element={<AddJob />} />
+          <Route path="/edit/:jobId" element={<AddJob />} />
           <Route path="/job/:jobId" element={<JobDetailsWrapper />} />
-          <Route path="*" element={<h2 className="text-center text-2xl">Page Not Found</h2>} />
+          <Route
+            path="*"
+            element={<h2 className="text-center text-2xl">Page Not Found</h2>}
+          />
         </Routes>
       </div>
     </Router>

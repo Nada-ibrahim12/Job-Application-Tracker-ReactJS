@@ -24,7 +24,9 @@ export class JobCard extends Component {
           <p className="mt-2 text-gray-700">
             Applied Date: {this.props.dateApplied}
           </p>
-          <p className="mt-2">Note: {this.props.notes}</p>
+          {this.props.notes && (
+            <p className="mt-2">Note: {this.props.notes}</p>
+          )}
         </div>
         <div className="mt-4 flex flex-col text-center">
           <p
