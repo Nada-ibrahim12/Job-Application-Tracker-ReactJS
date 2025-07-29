@@ -9,7 +9,7 @@ export default function Dashboard() {
       <p className="text-center mt-4 text-gray-600">
         Track and manage your job applications
       </p>
-      <div className="grid grid-cols-5 md:grid-cols-5 lg:grid-cols-6 gap-4 mt-8 text-center">
+      <div className="flex flex-wrap justify-center gap-9 mt-8">
         {[...Array(5)].map((_, i) => (
           <CountCard key={i} title="Sample Title" count={5} />
         ))}
