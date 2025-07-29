@@ -17,11 +17,11 @@ export class JobDetails extends Component {
         <h1 className="text-3xl font-bold m-8 text-center">Job Details</h1>
         <div className="container mx-auto shadow-xl shadow-cyan-700 rounded-lg p-6 w-1/2">
           <div className="mb-6 w-full flex flex-row items-center justify-between shadow-cyan-700 shadow-inner p-4 rounded-lg">
-            <h2 className="text-2xl font-bold mb-2">
+            <h2 className="text-2xl font-bold mb-2 sm:flex-col">
               {job ? job.title : "Job Title Here"}
             </h2>
             <p
-              className={`px-3 py-1 rounded-full bg-cyan-700 bg-opacity-50 font-bold ${
+              className={`px-3 py-1 sm:flex-col rounded-full bg-cyan-700 bg-opacity-50 font-bold ${
                 job
                   ? job.status === "applied"
                     ? "text-cyan-700"
@@ -39,16 +39,20 @@ export class JobDetails extends Component {
             </p>
           </div>
           <p className="text-gray-800 mb-4">
-            <span className="font-bold">Company:</span> {job ? job.company : "Company Name Here"}
+            <span className="font-bold">Company:</span>{" "}
+            {job ? job.company : "Company Name Here"}
           </p>
           <p className="text-gray-800 mb-4">
-            <span className="font-bold">Date Applied:</span> {job ? job.dateApplied : "Date Here"}
+            <span className="font-bold">Date Applied:</span>{" "}
+            {job ? job.dateApplied : "Date Here"}
           </p>
           <p className="text-gray-800 mb-4">
-            <span className="font-bold">Location:</span> {job ? job.location : "Location Here"}
+            <span className="font-bold">Location:</span>{" "}
+            {job ? job.location : "Location Here"}
           </p>
           <p className="text-gray-800 mb-4">
-            <span className="font-bold">Notes:</span> {job ? job.notes : "Job Notes Here"}
+            <span className="font-bold">Notes:</span>{" "}
+            {job ? job.notes : "Job Notes Here"}
           </p>
           <div className="btns flex justify-center space-x-4 mt-6">
             <button className="bg-cyan-700 text-white px-4 py-2 rounded hover:bg-cyan-900 transition-colors duration-200">
