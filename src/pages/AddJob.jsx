@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { jobs } from "../utils/dummyData";
+
 
 export class AddJob extends Component {
   render() {
@@ -49,14 +51,29 @@ export class AddJob extends Component {
             </div>
 
             <div className="mb-4">
-              <label className="block text-gray-700">Description</label>
+              <label className="block text-gray-700">Notes</label>
               <textarea
                 className="p-3 border border-gray-300 rounded-md w-full"
-                placeholder="Enter job description"
+                placeholder="Enter job notes"
               ></textarea>
             </div>
             <div className="col-span-2 flex justify-center">
-              <button className="bg-cyan-700 text-white text-xl px-10 py-4 rounded-md w-1/2 hover:bg-cyan-900 transition-colors duration-200">
+              <button className="bg-cyan-700 text-white text-xl px-10 py-4 rounded-md w-1/2 hover:bg-cyan-900 transition-colors duration-200"
+                type="submit"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const formData = new FormData(e.target);
+                  const newJob = {
+                    id: jobs.length + 1,
+                    title: formData.get("title"),
+                    company: formData.get("company"),
+                    location: formData.get("location"),
+                    status: formData.get("status"),
+                    dateApplied: formData.get("dateApplied"),
+                    notes: formData.get("notes"),
+                  };
+                  console.log(newJob);
+                }}>
                 Add Job
               </button>
             </div>

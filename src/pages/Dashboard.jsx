@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import CountCard from "../components/CountCard";
 import JobCard from "../components/JobCard";
+import { jobs } from "../utils/dummyData";
+import { jobStats } from "../utils/dummyData";
 
 export default function Dashboard() {
   return (
@@ -10,8 +12,8 @@ export default function Dashboard() {
         Track and manage your job applications
       </p>
       <div className="flex flex-wrap justify-center gap-9 mt-8">
-        {[...Array(5)].map((_, i) => (
-          <CountCard key={i} title="Sample Title" count={5} />
+        {Object.entries(jobStats).map(([key, value]) => (
+          <CountCard key={key} title={key.charAt(0).toUpperCase() + key.slice(1)} count={value} />
         ))}
       </div>
       <div className="mt-8 flex flex-col sm:flex-row gap-4">
@@ -31,14 +33,14 @@ export default function Dashboard() {
         </select>
       </div>
       <div className="jobs grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-        {[...Array(5)].map((_, i) => (
+        {jobs.map((job) => (
           <JobCard
-            key={i}
-            title="Sample Job Title"
-            company="Sample Company"
-            location="Remote"
-            description="This is a sample job description."
-            status="applied"
+            key={job.id}
+            title={job.title}
+            company={job.company}
+            location={job.location}
+            description={job.description}
+            status={job.status}
           />
         ))}
       </div>
