@@ -13,26 +13,37 @@ export default function Dashboard() {
       </p>
       <div className="flex flex-wrap justify-center gap-9 mt-8">
         {Object.entries(jobStats).map(([key, value]) => (
-          <CountCard key={key} title={key.charAt(0).toUpperCase() + key.slice(1)} count={value} />
+          <CountCard
+            key={key}
+            title={key.charAt(0).toUpperCase() + key.slice(1)}
+            count={value}
+          />
         ))}
       </div>
-      <div className="mt-8 flex flex-col sm:flex-row gap-4">
-        <input
-          type="search"
-          placeholder="Search companies or job titles..."
-          className="p-3 border border-gray-300 rounded-md flex-grow focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
-          aria-label="Search"
-          // onSubmit={(e) => e.preventDefault()}
-        />
-        <select className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
-          <option value="all">All Status</option>
-          <option value="applied">Applied</option>
-          <option value="interview">Interview</option>
-          <option value="offer">Offer</option>
-          <option value="rejected">Rejected</option>
-        </select>
+      <div className="m-3 mt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div className="flex-1">
+          <input
+            type="search"
+            placeholder="Search companies or job titles..."
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent shadow-sm"
+            aria-label="Search"
+          />
+        </div>
+        <div className="w-full md:w-1/3">
+          <select
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent shadow-sm"
+            aria-label="Filter by status"
+          >
+            <option value="all">All Status</option>
+            <option value="applied">Applied</option>
+            <option value="interview">Interview</option>
+            <option value="offer">Offer</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </div>
       </div>
-      <div className="jobs grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-7 gap-y-12 mt-8">
+
+      <div className="jobs grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-7 gap-y-12 mt-8 m-4 mb-10">
         {jobs.map((job) => (
           <JobCard
             key={job.id}
@@ -46,6 +57,6 @@ export default function Dashboard() {
           />
         ))}
       </div>
-      </div>
+    </div>
   );
 }

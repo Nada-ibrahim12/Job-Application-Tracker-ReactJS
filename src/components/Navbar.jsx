@@ -2,28 +2,79 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 export default class Navbar extends Component {
-  render() {
-    return (
-      <div className="container max-w-none flex justify-between items-center p-4 shadow-lg bg-white">
-        <h1 className="text-4xl font-bold mb-4 text-cyan-700">Job Tracker</h1>
+  constructor(props) {
+    super(props);
+    this.state = {
+      isMenuOpen: false,
+    };
+  }
 
-        <ul className="flex items-center space-x-5 font-bold  text-cyan-700 text-xl">
-          <li>
-            <Link to="/" className="hover:underline isactive:underline">
-              Dashboard
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/add"
-              className="bg-cyan-700 text-white flex items-center space-x-2 justify-center px-4 py-2 rounded hover:bg-cyan-900 transition-colors duration-200"
-            >
-              <i className="fas fa-plus"></i>
-              <p>Add Job</p>
-            </Link>
-          </li>
-        </ul>
-      </div>
+  toggleMenu = () => {
+    this.setState((prevState) => ({
+      isMenuOpen: !prevState.isMenuOpen,
+    }));
+  };
+
+  render() {
+    const { isMenuOpen } = this.state;
+
+    return (
+      <nav className="bg-white shadow-lg">
+        <div className="container max-w-none mx-auto px-4 py-4 flex items-center justify-between">
+          <h1 className="text-3xl font-bold text-cyan-700">Job Tracker</h1>
+
+          <button
+            className="md:hidden text-cyan-700 text-2xl focus:outline-none"
+            onClick={this.toggleMenu}
+            aria-label="Toggle navigation"
+          >
+            <i className="fas fa-bars"></i>
+          </button>
+
+          <ul className="hidden md:flex items-center space-x-6 text-cyan-700 font-bold text-lg">
+            <li>
+              <Link to="/" className="hover:underline">
+                Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/add"
+                className="bg-cyan-700 text-white flex items-center space-x-2 px-4 py-2 rounded hover:bg-cyan-900 transition-colors duration-200"
+              >
+                <i className="fas fa-plus"></i>
+                <span>Add Job</span>
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {isMenuOpen && (
+          <div className="md:hidden px-4 pb-4">
+            <ul className="flex flex-col space-y-4 text-cyan-700 font-bold text-lg">
+              <li>
+                <Link
+                  to="/"
+                  onClick={this.toggleMenu}
+                  className="hover:underline"
+                >
+                  Dashboard
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/add"
+                  onClick={this.toggleMenu}
+                  className="bg-cyan-700 text-white flex items-center space-x-2 px-4 py-2 rounded hover:bg-cyan-900 transition-colors duration-200"
+                >
+                  <i className="fas fa-plus"></i>
+                  <span>Add Job</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        )}
+      </nav>
     );
   }
 }
