@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useJobs } from "../context/JobContext";
+import { v4 as uuidv4 } from "uuid";
 
 const AddJob = () => {
   const { jobId } = useParams();
@@ -47,7 +48,7 @@ const AddJob = () => {
       updateJob(job);
       alert("Job updated successfully!");
     } else {
-      addJob({ ...job, id: Date.now() });
+      addJob({ ...job, id: uuidv4() });
       alert("Job added successfully!");
     }
 
