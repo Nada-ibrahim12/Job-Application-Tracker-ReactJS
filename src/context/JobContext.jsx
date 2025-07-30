@@ -18,7 +18,7 @@ export function JobProvider({ children }) {
     setJobs(jobs.map((job) => (job.id === updatedJob.id ? updatedJob : job)));
 
   return (
-    <JobContext.Provider value={{ jobs, addJob, deleteJob, updateJob }}>
+    <JobContext.Provider value={{ jobs, addJob, deleteJob, updateJob, setJobs }}>
       {children}
     </JobContext.Provider>
   );
