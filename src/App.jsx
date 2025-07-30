@@ -2,9 +2,9 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import AddJob from "./pages/AddJob";
-// import JobDetails from "./pages/JobDetails";
 import Navbar from "./components/Navbar";
 import JobDetailsWrapper from "./pages/JobDetails";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
           <Route path="/job/:jobId" element={<JobDetailsWrapper />} />
           <Route
             path="*"
-            element={<h2 className="text-center text-2xl">Page Not Found</h2>}
+            element={<NotFound />}
           />
         </Routes>
       </div>

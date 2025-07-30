@@ -164,6 +164,12 @@ export default function Dashboard() {
         </div>
       )}
 
+      {jobs.length === 0 && (
+        <div className="text-center mt-10 text-gray-500">
+          No jobs found. Start adding your job applications!
+        </div>
+      )}
+
       <div className="jobs grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-7 gap-y-12 mt-8 m-4 mb-10">
         {jobs.map((job) => (
           <JobCard
