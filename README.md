@@ -1,110 +1,153 @@
+# Job Application Tracker
 
-# Job Application Tracker (In Progress)
-
-A responsive and user-friendly web application for managing and tracking job applications. This project is built using **React.js**, **Vite**, and modern frontend technologies to help users stay organized throughout their job search journey.
-
----
-
-## 🚀 Project Overview
-
-The Job Application Tracker allows users to:
-
-* Add job applications with company name, job title, application status, date applied, and notes.
-* View a dashboard listing all job applications.
-* Access detailed views of each job, with options to edit or delete entries.
-* Export application data to a `.json` file for backup.
-* Import `.json` files to restore or merge data.
-* Navigate smoothly using **React Router**.
-* Enjoy a responsive layout that works well on both desktop and mobile devices.
+A responsive, user-friendly web application that helps users **manage and track job applications** with ease. Built using **React.js**, **Vite**, and **Tailwind CSS**, the project supports **CRUD functionality**, **data persistence**, **import/export of job data**, and **form validation** — everything you need to stay organized in your job hunt.
 
 ---
 
-## 🛠 Current Status
+## 📁 Project Structure
 
-> **In Development**
-> The core functionality, UI design, and state management are actively being built. Features will be released incrementally as the project progresses.
+```
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   ├── CountCard.jsx
+│   │   ├── JobCard.jsx
+│   │   └── Navbar.jsx
+│   ├── context/
+│   │   └── JobContext.jsx
+│   ├── pages/
+│   │   ├── AddJob.jsx
+│   │   ├── Dashboard.jsx
+│   │   ├── JobDetails.jsx
+│   │   └── NotFound.jsx
+│   ├── utils/
+│   │   └── withRouter.jsx
+│   ├── App.jsx
+│   ├── App.css
+│   ├── index.css
+│   ├── main.jsx
+├── jobs.json        // for test
+├── .gitignore
+├── README.md
+├── vite.config.js
+├── tailwind.config.js
+├── postcss.config.js
+├── package.json
+├── package-lock.json
+├── eslint.config.js
+└── index.html
+```
 
 ---
 
-## 📌 Planned Features
+## 🚀 Features
 
-* Dashboard to display all job applications (table/card layout).
-* Add Job form with validation.
-* Job Detail view with edit/delete functionality.
-* JSON Export/Import for data backup and restore.
-* Persistent data using `localStorage`.
-* Responsive UI with **Tailwind CSS**.
-* State management using **Context API** or **Redux**.
-* Routing with **React Router**.
-
----
-
-## 🧰 Technologies Used
-
-* **React.js**
-* **Vite** (Build tool and dev server)
-* **React Router DOM**
-* **Tailwind CSS**
-* **Context API** or **Redux** (for global state)
-* **LocalStorage** (for persistence)
-* Additional utilities:
-  * [`uuid`](https://www.npmjs.com/package/uuid) – for unique IDs
-  * [`date-fns`](https://date-fns.org/) – for date formatting
+✅ **Add New Job Application**
+✅ **Client-side Validations with Alerts** (e.g., prevent duplicate job IDs)
+✅ **Edit / Delete Existing Jobs**
+✅ **Detailed View for Each Job**
+✅ **Track Jobs by Status** (e.g., applied, interviewing, rejected)
+✅ **Count Cards** for job statistics
+✅ **Import `.json` File** (with duplicate checking)
+✅ **Export Jobs to `.json`**
+✅ **Responsive UI** for Desktop & Mobile
+✅ **Persistent Storage** using `localStorage`
+✅ **React Router Navigation**
+✅ **Context API State Management**
 
 ---
 
-## 📦 Getting Started
+## 📦 Technologies Used
 
-This project uses [Vite](https://vitejs.dev/) for fast and optimized development.
+| Technology       | Purpose                        |
+| ---------------- | ------------------------------ |
+| React.js         | Frontend library               |
+| Vite             | Lightning-fast dev environment |
+| Tailwind CSS     | Utility-first styling          |
+| React Router DOM | Routing and navigation         |
+| Context API      | Global state management        |
+| LocalStorage     | Job data persistence           |
+| UUID             | Unique job IDs                 |
 
-### Setup Instructions
+---
+
+## 📁 JSON File Structure (`jobs.json`)
+
+Each job object follows this format:
+
+```json
+{
+  "id": "uuid",
+  "title": "Frontend Developer",
+  "company": "TechCorp",
+  "status": "applied",
+  "dateApplied": "2025-07-30",
+  "location": "Cairo, Egypt",
+  "notes": "Sent resume via LinkedIn"
+}
+```
+
+---
+
+## 🧑‍💻 Getting Started
+
+Clone the project and install dependencies:
 
 ```bash
+git clone https://github.com/Nada-ibrahim12/job-application-tracker.git
+cd job-application-tracker
 npm install
+```
+
+### Development
+
+```bash
 npm run dev
-````
+```
 
-* Starts the development server.
-* Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
-* Hot Module Replacement (HMR) is enabled.
+Visit [http://localhost:5173](http://localhost:5173)
 
-### Build for Production
+### Production
 
 ```bash
 npm run build
 ```
 
-* Builds the app for production to the `dist/` folder.
-* Uses Vite’s optimized build process.
-
-### Preview Production Build
+To preview production locally:
 
 ```bash
 npm run preview
 ```
 
-* Serves the production build locally to verify before deployment.
+---
+
+## 📌 Validations & Warnings
+
+* Prevents submitting empty fields.
+* Warns if trying to add a job with a duplicate ID.
+* Shows error message if imported file contains duplicates.
+* Displays confirmation before deleting a job.
 
 ---
 
 ## 🧪 Testing
 
-```bash
-npm test
-```
+This project currently includes manual testing. Automated unit tests may be added in future versions.
 
 ---
 
-## 📖 Learn More
+## 📚 Learn More
 
-* [Vite Documentation](https://vitejs.dev/)
-* [React Documentation](https://reactjs.org/)
-* [Tailwind CSS Docs](https://tailwindcss.com/)
+* [React Docs](https://reactjs.org/)
+* [Vite Docs](https://vitejs.dev/)
+* [Tailwind CSS](https://tailwindcss.com/)
 * [React Router Docs](https://reactrouter.com/)
+* [uuid](https://www.npmjs.com/package/uuid)
 
 ---
 
-## 🤝 Contributing
+## 🤝 Contributions
 
-Currently a solo project, but collaboration and suggestions are welcome in future development phases.
+This is a solo project built by **Nada Ibrahim** as part of her React.js learning journey. Suggestions and contributions are welcome for future versions.
 
