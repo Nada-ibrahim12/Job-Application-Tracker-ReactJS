@@ -10,6 +10,13 @@ export default function Dashboard() {
   const [importMessage, setImportMessage] = useState("");
   const [messageType, setMessageType] = useState("");
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredJobs, setFilteredJobs] = useState(jobs);
+
+  useEffect(() => {
+    setFilteredJobs(jobs);
+  }, [jobs]);
+
   const handleImport = (e) => {
     const file = e.target.files[0];
     if (!file || file.type !== "application/json") return;
@@ -83,6 +90,19 @@ export default function Dashboard() {
     document.body.removeChild(a);
   };
 
+  const handleSearch = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    const filtered = jobs.filter(
+      (job) =>
+        job.title.toLowerCase().includes(query) ||
+        job.company.toLowerCase().includes(query)
+    );
+
+    setFilteredJobs(filtered);
+  };
+
   const jobStats = {
     all: jobs.length,
     applied: jobs.filter((job) => job.status === "applied").length,
@@ -112,12 +132,25 @@ export default function Dashboard() {
             placeholder="Search companies or job titles..."
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent shadow-sm"
             aria-label="Search"
+            value={searchQuery}
+            onChange={(e) => {
+              e.preventDefault();
+              handleSearch(e);
+            }}
           />
         </div>
         <div className="w-full md:w-1/3">
           <select
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent shadow-sm"
             aria-label="Filter by status"
+            onChange={(e) => {
+              const status = e.target.value;
+              if (status === "all") {
+                setFilteredJobs(jobs);
+              } else {
+                setFilteredJobs(jobs.filter((job) => job.status === status));
+              }
+            }}
           >
             <option value="all">All Status</option>
             <option value="applied">Applied</option>
@@ -171,7 +204,7 @@ export default function Dashboard() {
       )}
 
       <div className="jobs grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-7 gap-y-12 mt-8 m-4 mb-10">
-        {jobs.map((job) => (
+        {filteredJobs.map((job) => (
           <JobCard
             key={job.id}
             title={job.title}
