@@ -125,12 +125,16 @@ export default function Dashboard() {
           />
         ))}
       </div>
-      <div className="m-3 mt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div className="flex-1">
+      <div
+        className="m-3 mt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4
+             bg-cyan-700 p-4 bg-opacity-10 rounded-lg shadow-md shadow-cyan-700"
+      >
+        <div className="relative w-full md:w-2/3">
+          <i className="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
           <input
             type="search"
             placeholder="Search companies or job titles..."
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent shadow-sm"
+            className="w-full pl-12 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent shadow-sm"
             aria-label="Search"
             value={searchQuery}
             onChange={(e) => {
@@ -139,9 +143,11 @@ export default function Dashboard() {
             }}
           />
         </div>
-        <div className="w-full md:w-1/3">
+
+        <div className="relative lg:w-1/3 md:w-1/2">
+          <i className="fa-solid fa-filter absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
           <select
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent shadow-sm"
+            className="w-full pl-10 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent shadow-sm"
             aria-label="Filter by status"
             onChange={(e) => {
               const status = e.target.value;
@@ -172,16 +178,18 @@ export default function Dashboard() {
 
         <button
           onClick={() => fileInputRef.current.click()}
-          className="mt-4 px-6 py-3 bg-cyan-700 text-white rounded-lg hover:bg-cyan-800 transition-colors duration-200"
+          className="mt-4 px-6 py-3 bg-cyan-700 text-white rounded-lg hover:bg-cyan-800 transition-colors duration-200 space-x-2 flex items-center"
         >
-          Import Jobs
+          <i className="fa-solid fa-upload"></i>
+          <span>Import Jobs</span>
         </button>
 
         <button
           onClick={handleExport}
-          className="mt-4 px-6 py-3 bg-cyan-700 text-white rounded-lg hover:bg-cyan-800 transition-colors duration-200"
+          className="mt-4 px-6 py-3 bg-cyan-700 text-white rounded-lg hover:bg-cyan-800 transition-colors duration-200 space-x-2 flex items-center"
         >
-          Export Jobs
+          <i className="fa-solid fa-download"></i>
+          <span>Export Jobs</span>
         </button>
       </div>
       {importMessage && (
@@ -198,8 +206,9 @@ export default function Dashboard() {
       )}
 
       {jobs.length === 0 && (
-        <div className="text-center mt-10 text-gray-500">
-          No jobs found. Start adding your job applications!
+        <div className="text-center mt-10 text-gray-500 items-center">
+          <span>No jobs found. Start adding your job applications</span>{" "}
+          <i className="fa-solid fa-exclamation"></i>
         </div>
       )}
 

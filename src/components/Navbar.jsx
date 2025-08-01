@@ -21,7 +21,14 @@ export default class Navbar extends Component {
     return (
       <nav className="bg-white shadow-lg">
         <div className="container max-w-none mx-auto px-4 py-4 flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-cyan-700">Job Tracker</h1>
+          <div className="flex items-center space-x-2">
+            <img
+              src="../../public/job-search-svgrepo-com.svg"
+              className="w-10"
+              alt=""
+            />
+            <h1 className="text-3xl font-bold text-cyan-700">Job Tracker</h1>
+          </div>
 
           <button
             className="md:hidden text-cyan-700 text-2xl focus:outline-none"
@@ -32,10 +39,11 @@ export default class Navbar extends Component {
           </button>
 
           <ul className="hidden md:flex items-center space-x-6 text-cyan-700 font-bold text-lg">
-            <li>
-              <Link to="/" className="hover:underline">
-                Dashboard
-              </Link>
+            <li className="hover:underline">
+              <div className="flex items-center space-x-2">
+                <i className="fa-solid fa-chart-line"></i>
+                <Link to="/">Dashboard</Link>
+              </div>
             </li>
             <li>
               <Link
