@@ -2,10 +2,14 @@ import React, { Component, useEffect, useState } from "react";
 import CountCard from "../components/CountCard";
 import JobCard from "../components/JobCard";
 import { useJobs } from "../context/JobContext";
+import { useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Dashboard() {
   const { jobs, setJobs } = useJobs();
   const fileInputRef = React.useRef(null);
+  const location = useLocation();
+  const [alert, setAlert] = useState(null);
 
   const [importMessage, setImportMessage] = useState("");
   const [messageType, setMessageType] = useState("");
@@ -110,21 +114,90 @@ export default function Dashboard() {
     offer: jobs.filter((job) => job.status === "offer").length,
     rejected: jobs.filter((job) => job.status === "rejected").length,
   };
+
+  useEffect(() => {
+    if (location.state?.message) {
+      setAlert({
+        message: location.state.message,
+        type: location.state.type || "info",
+      });
+
+      const timer = setTimeout(() => {
+        setAlert(null);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [location.state]);
+
+  const bgColor = {
+    success: "bg-green-100 text-green-800",
+    error: "bg-red-100 text-red-800",
+    info: "bg-blue-100 text-blue-800",
+    warning: "bg-yellow-100 text-yellow-800",
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.9, y: 30 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
   return (
     <div className="container mx-auto">
+      {alert && (
+        <AnimatePresence>
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className={`p-4 flex justify-center rounded shadow-md m-4 w-1/3 ${
+              bgColor[alert.type]
+            }`}
+          >
+            <span>{alert.message}</span>
+          </motion.div>
+        </AnimatePresence>
+      )}
       <h1 className="text-2xl font-bold text-center mt-10">Job Applications</h1>
       <p className="text-center mt-4 text-gray-600">
         Track and manage your job applications
       </p>
-      <div className="flex flex-wrap justify-center gap-9 mt-8">
+      <motion.div
+        className="flex flex-wrap justify-center gap-9 mt-8"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {Object.entries(jobStats).map(([key, value]) => (
-          <CountCard
-            key={key}
-            title={key.charAt(0).toUpperCase() + key.slice(1)}
-            count={value}
-          />
+          <motion.div key={key} variants={cardVariants}>
+            <CountCard
+              title={key.charAt(0).toUpperCase() + key.slice(1)}
+              count={value}
+            />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
+
       <div
         className="m-3 mt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4
              bg-cyan-700 p-4 bg-opacity-10 rounded-lg shadow-md shadow-cyan-700"
@@ -212,7 +285,13 @@ export default function Dashboard() {
         </div>
       )}
 
-      <div className="jobs grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-7 gap-y-12 mt-8 m-4 mb-10">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.3 }}
+        className="jobs grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-7 gap-y-12 mt-8 m-4 mb-10"
+      >
         {filteredJobs.map((job) => (
           <JobCard
             key={job.id}
@@ -225,7 +304,7 @@ export default function Dashboard() {
             id={job.id}
           />
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }

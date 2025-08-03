@@ -58,6 +58,9 @@ A responsive, user-friendly web application that helps users **manage and track 
 * ✅ **Persistent Storage** using `localStorage`
 * ✅ **React Router Navigation**
 * ✅ **Context API for State Management**
+* ✅ **Animated Modals and Cards** using `Framer Motion`
+* ✅ **"Blob" Style Confirmation Dialogs**
+* ✅ **Staggered Animations for Cards**
 
 ---
 
@@ -72,6 +75,7 @@ A responsive, user-friendly web application that helps users **manage and track 
 | Context API      | Global state management       |
 | LocalStorage     | Persist job data locally      |
 | UUID             | Generate unique job IDs       |
+| Framer Motion    | Animations for modals, alerts & cards   |
 
 ---
 
@@ -133,6 +137,18 @@ npm run preview
 * ✅ Provides success/error feedback after import/export/delete actions
 
 ---
+🎨 UI/UX Enhancements
+* Framer Motion-powered animations
+
+* Animated toast-style alerts
+
+* Blob-style confirmation modal with morph animation
+
+* CountCard stats appear with staggered motion
+
+* Smooth transitions across all interactive elements
+
+---
 
 ## 📚 Topics Covered
 
@@ -145,6 +161,9 @@ npm run preview
 * **Search & Filter Logic**
 * **File Handling (Import/Export JSON)**
 * **Unique ID Generation with UUID**
+* **Declarative Animations with Framer Motion**
+
+
 
 ---
 

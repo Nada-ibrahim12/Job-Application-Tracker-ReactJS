@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate, useParams, Navigate } from "react-router-dom";
 import { useJobs } from "../context/JobContext";
+import { motion, AnimatePresence } from "framer-motion";
 
 const JobDetails = () => {
   const { jobId } = useParams();
   const navigate = useNavigate();
   const { jobs, deleteJob } = useJobs();
 
-  const [redirect, setRedirect] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const job = jobs.find((job) => job.id.toString() === jobId);
@@ -19,10 +19,19 @@ const JobDetails = () => {
   const confirmDelete = () => {
     if (job) {
       deleteJob(job.id);
-      alert("Job deleted successfully!");
-      setRedirect(true);
+      navigate("/", {
+        state: {
+          message: "Job deleted successfully!",
+          type: "success",
+        },
+      });
     } else {
-      alert("Job not found!");
+      navigate("/", {
+        state: {
+          message: "Job not found!",
+          type: "error",
+        },
+      });
     }
     setShowModal(false);
   };
@@ -31,34 +40,82 @@ const JobDetails = () => {
     setShowModal(false);
   };
 
-  if (redirect) return <Navigate to="/" />;
+  const backdropVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
+
+  const modalVariants = {
+    hidden: {
+      opacity: 0,
+      scale: 0.5,
+      borderRadius: "50%",
+      transition: { duration: 0.3 },
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      borderRadius: "16px",
+      transition: {
+        type: "spring",
+        stiffness: 150,
+        damping: 15,
+      },
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.5,
+      borderRadius: "50%",
+      transition: { duration: 0.3 },
+    },
+  };
 
   return (
     <>
-      {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
-          <div className="bg-white p-6 rounded-md shadow-md w-96">
-            <h3 className="text-lg font-semibold mb-4">Confirm Deletion</h3>
-            <p className="mb-6">Are you sure you want to delete this job?</p>
-            <div className="flex justify-end gap-4">
-              <button
-                onClick={cancelDelete}
-                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={confirmDelete}
-                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-              >
-                Confirm
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {showModal && (
+          <motion.div
+            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50"
+            variants={backdropVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+          >
+            <motion.div
+              className="bg-white p-6 rounded-md shadow-md w-96"
+              variants={modalVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <h3 className="text-lg font-semibold mb-4">Confirm Deletion</h3>
+              <p className="mb-6">Are you sure you want to delete this job?</p>
+              <div className="flex justify-end gap-4">
+                <button
+                  onClick={cancelDelete}
+                  className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={confirmDelete}
+                  className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                >
+                  Confirm
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      <div className="py-12 px-4">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 20 }}
+        transition={{ duration: 0.7 }}
+        className="py-12 px-4"
+      >
         <h1 className="text-3xl font-bold text-center mb-10 text-cyan-800">
           Job Details
         </h1>
@@ -121,7 +178,7 @@ const JobDetails = () => {
             </button>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

@@ -6,15 +6,15 @@ export class JobCard extends Component {
     console.log("JobCard props:", this.props);
     return (
       <div
-        className={`border p-6 rounded-xl shadow-md flex flex-row justify-between border-s-8 bg-white hover:shadow-lg transition-shadow duration-200
+        className={`border p-6 rounded-xl shadow-md flex flex-row justify-between border-s-8 bg-white hover:shadow-md transition-shadow duration-200
         ${
           this.props.status === "applied"
-            ? "border-cyan-700"
+            ? "border-cyan-700 hover:border-cyan-800 hover:shadow-cyan-800"
             : this.props.status === "interview"
-            ? "border-yellow-600"
+            ? "border-yellow-600 hover:border-yellow-700 hover:shadow-yellow-800"
             : this.props.status === "offer"
-            ? "border-green-700"
-            : "border-red-500"
+            ? "border-green-700 hover:border-green-800 hover:shadow-green-800"
+            : "border-red-500 hover:border-red-600 hover:shadow-red-600"
         }`}
       >
         <div>
@@ -24,9 +24,7 @@ export class JobCard extends Component {
           <p className="mt-2 text-gray-700">
             Applied Date: {this.props.dateApplied}
           </p>
-          {this.props.notes && (
-            <p className="mt-2">Note: {this.props.notes}</p>
-          )}
+          {this.props.notes && <p className="mt-2">Note: {this.props.notes}</p>}
         </div>
         <div className="mt-4 flex flex-col text-center">
           <p
