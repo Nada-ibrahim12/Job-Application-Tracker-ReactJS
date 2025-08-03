@@ -76,6 +76,7 @@ A responsive, user-friendly web application that helps users **manage and track 
 | LocalStorage     | Persist job data locally      |
 | UUID             | Generate unique job IDs       |
 | Framer Motion    | Animations for modals, alerts & cards   |
+| Fontawesome      | Icons                        |
 
 ---
 
